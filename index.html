@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Poppins:wght@600&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+  <title>NutriMente – Guida Gratuita</title>
+  <style>
+  #form-anchor { display: none; }
+</style>
+
+<style>
+  #cookie-banner {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: #f7f7f7;
+    border-top: 1px solid #ccc;
+    padding: 20px;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    box-shadow: 0 -2px 6px rgba(0,0,0,0.1);
+    z-index: 9999;
+    display: none;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+
+  #cookie-banner p {
+    margin: 0;
+    flex: 1;
+    color: #333;
+  }
+
+  .cookie-buttons {
+    display: flex;
+    gap: 10px;
+  }
+
+  .cookie-buttons button {
+    padding: 8px 14px;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    border-radius: 6px;
+  }
+
+  .accept-cookie {
+    background-color: #38b381;
+    color: white;
+  }
+
+  .decline-cookie {
+    background-color: #ddd;
+    color: #333;
+  }
+</style>
+
+</head>
+<body>
+  <header>
+    <div class="logo-wrapper" data-aos="fade-down">
+      <img src="Logo progetto.jpg" alt="Logo del progetto NutriMente" class="logo" />
+    </div>
+  </header>
+
+<main class="main-section">
+  <!-- UNICA sezione immagine + contenuto a destra -->
+<div class="form-section-wrapper" data-aos="fade-up">
+  <!-- Immagine Freddy a sinistra -->
+  <div class="image-wrapper">
+    <img src="unnamed.png" alt="Freddy" class="freddy-img" />
+  </div>
+
+  <!-- Contenitore dinamico a destra -->
+  <div class="form-wrapper">
+    
+    <!-- Form calcolatore -->
+    <div id="calcolatore-wrapper">
+      <h2 style="text-align:center; font-family:'Playfair Display', serif; color:#38b381; margin-bottom: 10px;">
+        Scopri quante calorie ti servono per tornare in forma ✨
+      </h2>
+      <p style="text-align:center; font-size:1rem; color:#555; margin-bottom: 30px;">
+        Inserisci i tuoi dati per scoprire quante calorie assumere ogni giorno. Il primo passo per una vita sana parte da qui!
+      </p>
+
+      <form id="calorie-form">
+        <label for="age">Età</label>
+        <input type="number" id="age" required>
+
+        <label for="gender">Genere</label>
+        <select id="gender" required>
+          <option value="">Seleziona</option>
+          <option value="male">Maschio</option>
+          <option value="female">Femmina</option>
+        </select>
+
+        <label for="height">Altezza (cm)</label>
+        <input type="number" id="height" required>
+
+        <label for="weight">Peso (kg)</label>
+        <input type="number" id="weight" required>
+
+        <label for="activity">Attività</label>
+        <select id="activity" required>
+          <option value="">Seleziona</option>
+          <option value="1.2">Sedentario</option>
+          <option value="1.375">Leggermente attivo</option>
+          <option value="1.55">Moderatamente attivo</option>
+          <option value="1.725">Molto attivo</option>
+          <option value="1.9">Estremamente attivo</option>
+        </select>
+
+        <label for="goal">Obiettivo</label>
+        <select id="goal" required>
+          <option value="">Seleziona</option>
+          <option value="0.8">Perdere peso</option>
+          <option value="1">Mantenere peso</option>
+          <option value="1.2">Aumentare massa</option>
+        </select>
+
+        <button type="submit" class="submit-btn">Calcola ora! 🚀</button>
+      </form>
+    </div>
+
+    <!-- Form guida -->
+    <div id="form-anchor" style="display: none;">
+     <div class="highlight-message">
+  <div class="kcal-box">
+    <h2>✅ Il tuo fabbisogno calorico</h2>
+    <div id="calories-output" class="calories-number">-- kcal</div>
+  </div>
+
+  <p id="motivational-line" class="motivational-text">
+    <!-- Frase motivazionale dinamica -->
+  </p>
+
+  <p class="cta-text">
+    Vuoi sapere come utilizzarle al meglio? Scarica subito la guida gratuita 👇
+  </p>
+</div>
+
+
+      <form id="contact-form">
+        <input type="text" id="nome" name="nome" placeholder="Nome" required />
+        <input type="text" id="cognome" name="cognome" placeholder="Cognome" required />
+        <input type="email" id="email" name="email" placeholder="Email" required />
+        <input type="hidden" id="kcal" name="kcal" />
+        <button type="submit"><span>📩</span> Scarica la guida gratuita ancora per poco tempo!⏳</button>
+      </form>
+
+      <div id="confirmation-message" style="display:none; text-align:center; padding: 2rem;">
+  <div class="checkmark-wrapper">
+    <div class="checkmark-circle">
+      <span class="checkmark">✔</span>
+    </div>
+  </div>
+  <h2 style="margin-top: 1rem; color: #38b381;">Guida inviata con successo!</h2>
+  <p style="font-size: 1rem; color: #555; max-width: 500px; margin: 1rem auto;">
+    Controlla la tua email: troverai lì la guida gratuita con tutti i consigli per iniziare il tuo percorso di benessere.
+  </p>
+  <p style="font-size: 0.9rem; color: #888;">Non la vedi? Controlla anche nello spam o nella casella “Promozioni”.</p>
+</div>
+
+    </div>
+  </div>
+</div>
+
+
+    <!-- Contenuti Extra -->
+    <div id="extra-content" data-aos="fade-up">
+      <!-- MOTIVATIONAL -->
+      <div class="motivational-message">
+        <span class="main-question">
+          Vorresti migliorare la tua <span class="green">forma fisica</span> ma non sai da dove partire?
+        </span>
+        <div class="arrow-down">⬇</div>
+        <span class="new-subtext">
+          Ecco cosa troverai <span class="green-underline">nella guida</span>:
+        </span>
+        <div class="info-boxes">
+          <div class="info-box">
+            <h3>Alimentazione equilibrata</h3>
+            <p>Scopri come bilanciare correttamente la tua alimentazione per risultati duraturi.</p>
+          </div>
+          <div class="info-box">
+            <h3>Miglioramento della forma fisica</h3>
+            <p>Un buon punto di partenza per iniziare a raggiungere i tuoi obiettivi.</p>
+          </div>
+          <div class="info-box">
+            <h3>Equilibrio mentale</h3>
+            <p>Approcci per gestire lo stress e favorire il benessere psicologico.</p>
+          </div>
+          <div class="info-box">
+            <h3>Strategie pratiche</h3>
+            <p>Consigli semplici e pratici per migliorare giorno dopo giorno.</p>
+          </div>
+        </div>
+      </div>
+ <!-- BENEFICI -->
+    <div class="why-wellness" data-aos="fade-up">
+      <h2>Perché prenderti cura del tuo benessere?</h2>
+      <p class="intro-text">Ecco alcuni dei benefici che potrai ottenere, giorno dopo giorno, semplicemente migliorando il tuo benessere fisico e mentale:</p>
+
+      <div class="benefits-list">
+        <div class="benefit" data-aos="fade-up">
+          <div class="icon">💪</div>
+          <div class="benefit-text">
+            <h3>Più energia durante la giornata</h3>
+            <p>Sentirai un flusso costante di energia che ti accompagnerà per tutta la giornata.</p>
+          </div>
+        </div>
+        <div class="benefit" data-aos="fade-up">
+          <div class="icon">🛏️</div>
+          <div class="benefit-text">
+            <h3>Miglior qualità del sonno</h3>
+            <p>Un corpo sano favorisce un sonno più profondo e rigenerante.</p>
+          </div>
+        </div>
+        <div class="benefit" data-aos="fade-up">
+          <div class="icon">🚀</div>
+          <div class="benefit-text">
+            <h3>Maggiore motivazione</h3>
+            <p>Essere in salute ti rende più motivato e concentrato nei compiti quotidiani.</p>
+          </div>
+        </div>
+        <div class="benefit" data-aos="fade-up">
+          <div class="icon">👨‍👩‍👧‍👦</div>
+          <div class="benefit-text">
+            <h3>Esempio positivo per i figli</h3>
+            <p>Prendersi cura di sé è un atto d'amore per la propria famiglia.</p>
+          </div>
+        </div>
+        <div class="benefit" data-aos="fade-up">
+          <div class="icon">💖</div>
+          <div class="benefit-text">
+            <h3>Miglioramento del rapporto sessuale</h3>
+            <p>Un corpo sano e una mente equilibrata migliorano l'intimità e la connessione.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+      <!-- TESTIMONIANZE -->
+      <section class="case-studies">
+        <h2 class="case-title">
+          Ecco i <span class="green">risultati</span> ottenuti da chi segue i <span class="green">nostri consigli</span>
+        </h2>
+        <div class="case-display">
+          <div class="case-images">
+            <img id="case-img" src="Maria Grazia.jpg" alt="Maria Grazia" class="case-img">
+          </div>
+        </div>
+        <div class="case-description" id="case-description"></div>
+        <div class="controls">
+          <button class="arrow left" id="prev">&#10094;</button>
+          <button class="arrow right" id="next">&#10095;</button>
+        </div>
+      </section>
+
+      <!-- TEAM -->
+      <section class="team-section">
+        <h2 class="team-title">Chi c’è dietro <span class="green">NutriMente</span>?</h2>
+        <p class="team-intro">
+          Siamo un team di professionisti con un’unica missione: accompagnarti verso il raggiungimento di un benessere autentico, completo e duraturo.<br><br>
+          Il nostro metodo si basa su un approccio multidisciplinare e sostenibile, accessibile a tutti, e soprattutto personalizzato.
+        </p>
+        <div class="team-slider">
+          <div class="team-member active">
+            <img src="Federico.jpg" alt="Federico" />
+            <h3>Federico</h3>
+            <p>Fitness Coach – Percorsi di allenamento mirati e personalizzati, con motivazione costante.</p>
+          </div>
+          <div class="team-member">
+            <img src="Vanna.jpg" alt="Vanna" />
+            <h3>Vanna</h3>
+            <p>Nutrizionista – Piani nutrizionali su misura, promuovendo consapevolezza e educazione alimentare.</p>
+          </div>
+          <div class="team-member">
+            <img src="Sara.jpg" alt="Sara" />
+            <h3>Sara</h3>
+            <p>Psicologa – Ti guida nella comprensione del rapporto con il cibo per ritrovare equilibrio e benessere duraturo.</p>
+          </div>
+        </div>
+        <div class="controls">
+          <button class="arrow left" id="team-prev">&#10094;</button>
+          <button class="arrow right" id="team-next">&#10095;</button>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+  <script>
+document.addEventListener("DOMContentLoaded", function () {
+  AOS.init();
+  const contactForm = document.getElementById("contact-form");
+  if (contactForm) {
+    contactForm.addEventListener("submit", function(event) {
+    event.preventDefault();
+    const button = this.querySelector("button");
+    button.disabled = true;
+    button.textContent = "Invio in corso...";
+
+    const nome = document.getElementById("nome").value;
+    const cognome = document.getElementById("cognome").value;
+    const email = document.getElementById("email").value;
+    const kcal = document.getElementById("kcal").value;
+
+   fetch("https://connect.mailerlite.com/api/subscribers", {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+    "Authorization": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiI0IiwianRpIjoiZTI0OTQzMTZiNzVlM2M2MWZjYmY5YzNiODU2ZmI4MTZhYWIxZTMyOTVjZTNiMzgzYWYwNTljOTJlZjI5NmRhOGM5YjQ5NjJkOTI5ODk0YTIiLCJpYXQiOjE3NDg1MzkyNzUuOTM1NTE1LCJuYmYiOjE3NDg1MzkyNzUuOTM1NTE3LCJleHAiOjQ5MDQyMTI4NzUuOTMxMTY5LCJzdWIiOiIxNTYyNjg2Iiwic2NvcGVzIjpbXX0.YFlq4EFboWyEbxniPZByEzlAAUs9sxNeWEBQJrkMVJF-PI6jlBy39KipEI0W_pWtKAOyqEVeUtdlZWDau2-tB8DnDxGagRW97gZELegK8QbfbE72mmg-HUGSitUHfGNjn6Y3LsnMh6sz34iqDmrS2ECVN6ucizGRBZXaEiQZzBYHlsEOWMPg_xEWYe99oEfCcRx465iIjYL3em4gnRCzr1BNa9j2EfXvagMjCfZGjDec2xcU4nm3gefHUxxoIJoKiFi1wfz2q1D8Zt6zCaLLyHZZ0_B8ElD5lsMpkWO7r62cX6cPQTw4dBa86dnpb1PfKEVPEmTKqS97-pOYXLWzSpaADWhPuKjrnVmSZg1CVaLLlKKQOyQA_ZPIgeVs17OZ74Xe9BG6ECGv5VLly8HAqmBv03nwO5bzAU3os9W-PJbYKOPQFJ9KteL9ZAkNEHdDcqBJt9Yj6mfGIbtxGMBfZxpeR5w216083kurZPeL0BLtlm_YEwBomfwLZzRnbNJTVAisCefLgstPiBYjiUigKkELV4mhmItJEkGY863QYsfpH7NfnA8s_EiNYaWwDXgHrqcJ2yXuKeUJud4vXJKCHfUNhYjSWc6w4hMVxrLzZRhIDF62xM5yuHqIR6lsdDuD64t8Ju8Jw11hyUgGgu8j_Tc9vTGqv1F9-Upp5XLuO7U"  // <-- già aggiornato
+  },
+  body: JSON.stringify({
+    email: email,
+    fields: {
+      nome: nome,
+      cognome: cognome,
+      kcal: kcal
+    },
+    groups: ["155469860989568463"]
+  })
+})
+.then(res => {
+  if (!res.ok) {
+    return res.json().then(err => {
+     console.error("📛 Errore MailerLite:", JSON.stringify(err, null, 2));
+      throw new Error("Errore iscrizione");
+    });
+  }
+  contactForm.style.display = "none";
+  document.getElementById("confirmation-message").style.display = "block";
+})
+.catch((error) => {
+  alert("Errore durante l'invio. Riprova più tardi.");
+  console.error(error);
+  button.disabled = false;
+  button.textContent = "Scarica la guida gratuita ancora per poco tempo!⏳";
+});
+
+  });
+} // <-- chiude if (contactForm)
+
+// === Calcolatore
+document.getElementById("calorie-form").addEventListener("submit", function (e) {
+  e.preventDefault();
+  const age = parseInt(document.getElementById('age').value);
+  const gender = document.getElementById('gender').value;
+  const height = parseFloat(document.getElementById('height').value);
+  const weight = parseFloat(document.getElementById('weight').value);
+  const activity = parseFloat(document.getElementById('activity').value);
+  const goal = parseFloat(document.getElementById('goal').value);
+
+  let bmr = gender === 'male'
+    ? 10 * weight + 6.25 * height - 5 * age + 5
+    : 10 * weight + 6.25 * height - 5 * age - 161;
+
+  const baseCalories = Math.round(bmr * activity);
+  const finalCalories = Math.round(baseCalories * goal);
+
+  document.getElementById('calories-output').textContent = `${finalCalories} kcal`;
+  document.getElementById('kcal').value = `${finalCalories} kcal`;
+
+  const message = goal < 1
+    ? "📉 Queste sono le kcal per perdere peso in modo efficace e sostenibile."
+    : goal === 1
+      ? "⚖️ Queste sono le kcal ideali per mantenere il tuo peso attuale in equilibrio."
+      : "💪 Queste sono le kcal perfette per aumentare massa in modo intelligente.";
+
+  document.getElementById('motivational-line').textContent = message;
+
+  const formAnchor = document.getElementById("form-anchor");
+  if (formAnchor) {
+    document.getElementById("calcolatore-wrapper").style.display = "none";
+    formAnchor.style.display = "block";
+    formAnchor.scrollIntoView({ behavior: "smooth" });
+  }
+});
+
+// === Cookie banner
+const banner = document.getElementById("cookie-banner");
+const acceptBtn = document.querySelector(".accept-cookie");
+const declineBtn = document.querySelector(".decline-cookie");
+
+if (acceptBtn && declineBtn) {
+  acceptBtn.addEventListener("click", function () {
+    localStorage.setItem("cookie-consent", "accepted");
+    banner.style.display = "none";
+  });
+
+  declineBtn.addEventListener("click", function () {
+    localStorage.setItem("cookie-consent", "declined");
+    banner.style.display = "none";
+  });
+}
+}); // <== Questa chiude il DOMContentLoaded
+
+
+</script>
+<footer style="background-color: #f0fdf7; padding: 2rem 1rem; text-align: center; font-family: 'Inter', sans-serif; font-size: 0.9rem; color: #444; border-top: 1px solid #e0e0e0;">
+  <div style="max-width: 800px; margin: 0 auto;">
+    <p style="margin-bottom: 1rem;">
+      © 2025 <strong>NutriMente</strong> – Tutti i diritti riservati.
+    </p>
+    <p>
+      <a href="privacy.html" target="_blank" style="color: #38b381; text-decoration: none; margin-right: 15px;">
+        Privacy Policy
+      </a>
+      <a href="cookie.html" target="_blank" style="color: #38b381; text-decoration: none;">
+        Cookie Policy
+      </a>
+    </p>
+    <p style="margin-top: 1rem; font-size: 0.8rem; color: #888;">
+      Realizzato con ❤️ per il tuo benessere.
+    </p>
+  </div>
+</footer>
+
+
+
+</body>
+</html>
+
